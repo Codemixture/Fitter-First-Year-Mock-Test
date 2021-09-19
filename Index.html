@@ -1,0 +1,1169 @@
+<meta content="width=device-width, initial-scale=1" name="viewport">
+
+	<style>
+	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+
+
+body{
+	margin: 0;
+	font-size: 16px;
+	background-color: #FFFFFF;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+}
+
+*{
+	box-sizing: border-box;
+	margin:0;
+	padding:0;
+	outline: none;
+}
+
+.custom-box{
+	max-width: 700px;
+	background-color: #ffffff;
+	margin:40px auto;
+	padding: 30px;
+	border-radius: 10px;
+	animation: fadeInRight 1s ease;
+}
+@keyframes fadeInRight{
+	0%{
+		transform: translateX(40px);
+		opacity:0;
+	}
+	100%{
+	  transform: translateX(0px);	
+	  opacity:1;
+	}
+}
+.custom-box::before,
+.custom-box::after{
+	content: '';
+	clear: both;
+	display: table;
+}
+.custom-box.hide{
+	display: none;
+}
+
+.home-box h3{
+	font-size: 18px;
+	color:#000000;
+	font-weight: 500;
+	margin-bottom: 15px;
+	line-height: 25px;
+}
+
+.home-box p{
+	font-size: 16px;
+	margin-bottom: 10px;
+	line-height: 22px;
+	color:#000000;
+	font-weight: 400;
+}
+.home-box p span{
+	font-weight: 500;
+}
+.home-box .btn{
+  margin-top: 20px;
+}
+.btn{
+	padding: 15px 45px;
+	background-color: #009688;
+	color:#ffffff;
+	border:none;
+	border-radius: 5px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.quiz-box .question-number,
+.quiz-box .question-text,
+.quiz-box .option-container,
+.quiz-box .next-question-btn,
+.quiz-box .answers-indicator{
+   width: 100%;
+   float: left;
+}
+.quiz-box .question-number{
+	font-size: 18px;
+	color:#009688;
+	font-weight: 600;
+	border-bottom:1px solid #cccccc;
+	padding-bottom: 10px;
+	line-height: 25px
+}
+.quiz-box .question-text{
+	font-size: 22px;
+	color:#000000;
+	line-height: 28px;
+	font-weight: 400;
+	padding: 20px 0;
+	margin:0;
+}
+
+.quiz-box .option-container .option{
+	background-color: #cccccc;
+	padding:13px 15px;
+	font-size: 16px;
+	line-height: 22px;
+	color:#000000;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	text-transform: capitalize;
+	opacity:0;
+	animation: fadeIn 0.3s ease forwards;
+	position: relative;
+	overflow:hidden;
+}
+.quiz-box .option-container .option.already-answered{
+	pointer-events: none;
+}
+@keyframes fadeIn{
+	0%{
+		opacity:0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+.quiz-box .option-container .option.correct::before{
+ content: '';
+ position: absolute;
+ left:0;
+ top:0;
+ height: 100%;
+ width: 100%;
+ background-color: green;
+ z-index: -1;
+ animation: slideInLeft .5s ease forwards
+}
+@keyframes slideInLeft{
+	0%{
+		transform: translateX(-100%);
+	}
+	100%{
+	 transform: translateX(0%);	
+	}
+}
+.quiz-box .option-container .option.wrong::before{
+ content: '';
+ position: absolute;
+ left:0;
+ top:0;
+ height: 100%;
+ width: 100%;
+ background-color: red;
+ z-index: -1;
+ animation: slideInLeft .5s ease forwards
+}
+.quiz-box .option-container .option.wrong{
+	color:#ffffff;
+}
+.quiz-box .option-container .option.correct{
+	color:#ffffff;
+}
+.quiz-box .btn{
+	margin:15px 0;
+}
+.quiz-box .answers-indicator{
+	border-top: 1px solid #cccccc;
+}
+.quiz-box .answers-indicator div{
+	height: 40px;
+	width: 40px;
+	display: inline-block;
+	background-color: #cccccc;
+	border-radius: 50%;
+	margin-right: 3px;
+	margin-top: 15px;
+}
+.quiz-box .answers-indicator div.correct{
+	background-color: green;
+	background-image: url("../img/correct.png");
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.quiz-box .answers-indicator div.wrong{
+	background-color: red;
+	background-image: url("../img/wrong.png");
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.result-box{
+	text-align: center;
+}
+.result-box.hide{
+	display: none;
+}
+
+.result-box h1{
+	font-size: 36px;
+	line-height: 42px;
+	color:#009688;
+}
+.result-box table{
+	width: 100%;
+	border-collapse: collapse;
+	margin:30px 0;
+}
+.result-box table td{
+	border:1px solid #cccccc;
+	padding:8px 15px;
+	font-weight: 500;
+	color:#000000;
+	width: 50%;
+	text-align: left;
+	font-size: 18px;
+}
+.result-box .btn{
+	margin-right: 20px;
+}
+
+
+@media(max-width: 767px){
+	.result-box .btn{
+		margin-bottom: 15px;
+	}
+	body{
+		padding: 15px;
+	}
+}
+
+	</style>
+
+
+
+
+
+  <div class="home-box custom-box">
+      <h3>Instruction:</h3>
+      <p>Total number of questions: <span class="total-question"></span></p>
+      <button class="btn" onclick="startQuiz()" type="button">Start Quiz</button>
+  </div>
+
+  <div class="quiz-box custom-box hide">
+      <div class="question-number">
+          
+      </div>
+      <div class="question-text">
+         
+      </div>
+      <div class="option-container">
+          
+      </div>
+      <div class="next-question-btn">
+         <button class="btn" onclick="next()" type="button">Next</button>
+      </div>
+      <div class="answers-indicator">
+        
+      </div>
+  </div>
+
+  <div class="result-box custom-box hide">
+      <h2>Quiz Result</h2>
+      <table>
+         <tbody><tr>
+             <td>Total Question</td>
+             <td><span class="total-question"></span></td>
+         </tr>
+         <tr>
+             <td>Attempt</td>
+             <td><span class="total-attempt"></span></td>
+         </tr>
+         <tr>
+             <td>Correct</td>
+             <td><span class="total-correct"></span></td>
+         </tr>
+         <tr>
+             <td>Wrong</td>
+             <td><span class="total-wrong"></span></td>
+         </tr>
+         <tr>
+             <td>Percentage</td>
+             <td><span class="percentage"></span></td>
+         </tr>
+         <tr>
+             <td>Your Total Score</td>
+             <td><span class="total-score"></span></td>
+         </tr>
+      </tbody></table>
+      <button class="btn" onclick="tryAgainQuiz()" type="button">Try Again</button>
+      <button class="btn" onclick="goToHome()" type="button">Go To Home</button>
+  </div>
+
+<script>
+  
+
+    // Question Setup
+ // Array of Objects
+ const quiz = [
+  {
+           q:"Q. Name the part marked as x. | X क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2379; न&#2366;म बत&#2366;ए&#2404;<br/><img src='https://lh3.googleusercontent.com/-kxsCrlNxxL0/YEDTQXN3JFI/AAAAAAAAI1U/SEGvWiHwpmsrMMAMaqN7vW0MHI6w5he_gCLcBGAsYHQ/image.png'>",
+           options:["(A) Leg | ल&#2375;ग","(B) Peg | प&#2375;ग","(C) Washer | व&#2377;शर","(D) Fulcrum | फलक&#2381;रम"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Name the angular measuring instrument. | इस क&#2379;ण&#2368;य म&#2366;पक य&#2306;त&#2381;र क&#2366; न&#2366;म बत&#2366;इए&#2404;<br/><img src='https://lh3.googleusercontent.com/-8uMOBvF7c8M/YEDTS5555CI/AAAAAAAAI1Y/SwveUExKuJM4rJ9bY8c4Ze_Jyohmnp0vACLcBGAsYHQ/image.png'>",
+           options:["(A) Bevel gauge | ब&#2375;वल ग&#2375;ज ","(B) Bevel protractor | वल प&#2381;र&#2379;ट&#2381;र&#2376;क&#2381;टर ","(C) Universal bevel gauge | य&#2370;न&#2367;वर&#2381;सल ब&#2375;वल ग&#2375;ज","(D) Universal surface gauge | य&#2370;न&#2367;वर&#2381;सल सरफ&#2375;स ग&#2375;ज"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Which is used for filling narrow grooves and angles above 10&#176;? | 10 &#176; स&#2375; ऊपर क&#2375; स&#2306;क&#2368;र&#2381;ण ख&#2366;&#2306;च&#2375; और क&#2379;ण क&#2379; भरन&#2375; क&#2375; ल&#2367;ए क&#2367;सक&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Square file | स&#2381;क&#2381;व&#2366;यर फ&#2364;&#2366;इल ","(B) Half round file | आध&#2368; ग&#2379;ल फ&#2366;इल (ह&#2366;फ र&#2366;उ&#2306;ड फ&#2366;इल) ","(C) Triangular file | त&#2381;र&#2367;क&#2379;ण&#2368;य फ&#2364;&#2366;इल","(D) Knife edge file | न&#2366;इफ एज फ&#2366;इल"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Name the defect that causes the metal chips to clog between the teeth of file? | उस द&#2379;ष क&#2366; न&#2366;म बत&#2366;इए जब ध&#2366;त&#2369; क&#2375; च&#2367;प&#2381;स फ&#2366;इल क&#2375; द&#2366;&#2306;त&#2379;&#2306; क&#2375; ब&#2368;च घ&#2369;स ज&#2366;त&#2375; ह&#2376; ?",
+           options:["(A) File bite | फ&#2366;इल ब&#2366;ईट ","(B) Pinning of file | फ&#2364;&#2366;इल क&#2368; प&#2367;न&#2367;&#2306;ग ","(C) Warping of file | फ&#2366;इल क&#2368; व&#2377;र&#2381;पइ&#2306;ग ","(D) Glazing of file | फ&#2364;&#2366;इल क&#2368; ग&#2381;ल&#2375;ज&#2367;&#2306;ग"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Which chisel is used for cutting oil grooves? | आयल व&#2375;स क&#2379; क&#2366;टन&#2375; क&#2375; ल&#2367;ए क&#2367;स छ&#2375;न&#2368; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Flat chisel | फ&#2381;ल&#2376;ट छ&#2375;न&#2368;","(B) web chisel | व&#2375;ब छ&#2375;न&#2368; ","(C) Half round nose chisel | ह&#2366;फ र&#2366;उ&#2306;ड न&#2379;ज छ&#2375;न&#2368; ","(D) Diamond point chisel | ड&#2366;यम&#2306;ड प&#2377;इ&#2306;ट छ&#2375;न&#2368;"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Name the file. | इस फ&#2364;&#2366;इल क&#2366; न&#2366;म बत&#2366;ए&#2404;<br/><img src='https://lh3.googleusercontent.com/-nmS4ONyg_WQ/YEDTWdYAfJI/AAAAAAAAI1g/WmRByK3yLrYdiG6dR5cM8z3FOL7Q8OvTQCLcBGAsYHQ/image.png'>",
+           options:["(A) Barrot file | बर&#2381;ग&#2375;ट फ&#2366;इल ","(B) Riffler file | र&#2367;फ&#2381;ल&#2375; र फ&#2366;इल","(C) Crossing file | क&#2381;र&#2366;स&#2367;&#2306;ग फ&#2366;इल","(D) Mill saw file | म&#2367;ल स&#2377; फ&#2366;इल"],
+           answer:0,
+       },
+       {
+           q:"Q. What is the name of vice? | इस व&#2366;इस क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-likUnBPz0oc/YEDTYl4edvI/AAAAAAAAI1k/KmHwuL_T43QSws4U_qD0jOpq8qqTOzj0gCLcBGAsYHQ/image.png'>",
+           options:["(A) Pin vice | प&#2367;न व&#2366;इस","B) Pipe vice | प&#2366;इप व&#2366;इस ","(C) Hand vice | ह&#2376;ण&#2381;ड व&#2366;इस","(D) Machine vice | मश&#2368;न व&#2366;इस"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Which grinding machine is used for heavy duty work? | ह&#2376;व&#2368; ड&#2381;य&#2370;ट&#2368; वर&#2381;क क&#2375; ल&#2367;ए क&#2367;स ग&#2381;र&#2366;इ&#2306;ड&#2367;&#2306;ग मश&#2368;न क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Bench grinder | ब&#2375;&#2306;च ग&#2381;र&#2366;इ&#2306;डर","(B) Portable grinder | प&#2379;र&#2381;ट&#2375;बल ग&#2381;र&#2366;इ&#2306;डर ","(C) Pedestal grinder | प&#2375;ड&#2367;स&#2381;टल ग&#2381;र&#2366;इ&#2306;डर","(D) Surface grinder | सरफ&#2375;स ग&#2381;र&#2366;इ&#2306;डर"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Which chisel is used for separating materials after chain drilling? | च&#2375;न ड&#2381;र&#2367;ल&#2367;&#2306;ग क&#2375; ब&#2366;द मट&#2375;र&#2367;यल क&#2379; अलग करन&#2375; क&#2375; ल&#2367;ए क&#2367;स छ&#2375;न&#2368; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) web chisel | व&#2375;ब छ&#2375;न&#2368; ","(B) Flat chisel | फ&#2381;ल&#2376;ट छ&#2375;न&#2368;","(C) Cross cut chisel | क&#2381;र&#2377;स कट छ&#2375;न&#2368;","(D) ddddd"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Which file is used for sharpening the teeth of wood working saws? | लकड&#2364;&#2368; क&#2366; क&#2366;म करन&#2375; व&#2366;ल&#2375; आर&#2368; क&#2375; द&#2366;&#2306;त&#2379;&#2306; क&#2379; त&#2375;ज करन&#2375; क&#2375; ल&#2367;ए क&#2367;स फ&#2366;इल क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Barrette file | ब&#2376;र&#2375;ट फ&#2366;इल","(B) Tinker s file | ट&#2367;&#2306;कर फ&#2366;इल ","(C) Mill Saw file | म&#2367;ल स&#2377; फ&#2364;&#2366;इल","(D) Riffler file | र&#2367;फ&#2381;ल&#2375;र फ&#2364;&#2366;इल"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Where will be the weight of the hammer stamped? | हथ&#2380;ड&#2375; क&#2366; वजन क&#2379; कह&#2366; दर&#2381;श&#2366;य&#2366; ज&#2366;त&#2366; ह&#2376; ? ",
+           options:["(A) Face | फ&#2375;स ","(B) Pein | प&#2367;न ","(C) Cheek | च&#2368;क ","(D) Eye hole | ऑय ह&#2379;ल"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What will be the effect if the clearance angle of chisel is less than recommended angle while chipping? | अगर च&#2367;प&#2367;&#2306;ग करत&#2375; समय छ&#2375;न&#2368; क&#2366; न&#2367;क&#2366;स&#2368; क&#2379;ण अन&#2369;श&#2306;स&#2367;त क&#2379;ण स&#2375; कम ह&#2376; त&#2379; क&#2381;य&#2366; प&#2381;रभ&#2366;व ह&#2379;ग&#2366;?",
+           options:["(A) Cutting edge cannot penetrate, chisel will slip | कट&#2367;&#2306;ग एज घ&#2369;स नह&#2368;&#2306; सकत&#2368;, छ&#2375;न&#2368; फ&#2367;सल ज&#2366;एग&#2368;","(B) Cutting edge digs in, cut will be deeper | कट&#2367;&#2306;ग एज अन&#2381;दर घ&#2369;स ज&#2366;एग&#2366;, कट और गहर&#2366; ह&#2379;ग&#2366; ","(C) Cutting edge will break | कट&#2367;&#2306;ग एज ट&#2370;ट ज&#2366;एग&#2368; ","(D) Cutting edge of chisel move freely on straight line | छ&#2375;न&#2368; क&#2368; कट&#2367;&#2306;ग एज स&#2368;ध&#2368; र&#2375;ख&#2366; पर स&#2381;वत&#2306;त&#2381;र र&#2370;प स&#2375; चलत&#2366; ह&#2376;"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Name the property of metal to resist the effect of tensile forces without rupture. | ट&#2370;ट&#2375; ब&#2367;न&#2366; तन&#2381;यत&#2366; बल&#2379;&#2306; क&#2375; प&#2381;रभ&#2366;व क&#2366; व&#2367;र&#2379;ध करन&#2375; व&#2366;ल&#2368; ध&#2366;त&#2369; क&#2368; प&#2381;र&#2377;पर&#2381;ट&#2368; क&#2366; न&#2366;म बत&#2366;ए&#2404; ",
+           options:["(A) Ductility | डक&#2381;ट&#2367;लट&#2368; ","(B) Tenacity | टन&#2376;स&#2367;ट&#2368;","(C) Elasticity | इल&#2376;स&#2381;ट&#2367;स&#2367;ट&#2368; ","(D) Malleability | म&#2376;ल&#2368;एब&#2367;लट&#2368;"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Name the part marked as x . | X क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2379; न&#2366;म बत&#2366;ए&#2404;<br/><img src='https://lh3.googleusercontent.com/-hot7sh94oLs/YEDTbmpg6NI/AAAAAAAAI1o/xQPsvw99H2c4sPw_xx2tZ81duYk5eY-WACLcBGAsYHQ/image.png'>",
+           options:["(A) Anvil | एन&#2381;व&#2367;ल","(B) himble | थ&#2367;म&#2381;ब&#2381;ल ","(C) Spindle | स&#2381;प&#2367;&#2306;डल ","(D) Spindle lock | स&#2381;प&#2367;&#2306;डल ल&#2377;क"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the accuracy of metric outside micrometer? | म&#2368;ट&#2381;र&#2367;क आउटस&#2366;इड म&#2366;इक&#2381;र&#2379;म&#2368;टर क&#2368; एक&#2381;य&#2370;र&#2375;स&#2368; क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) 0.01 mm","(B) 0.001 mm","(C) 0.02 mm","(D) 0.002 mm"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Name the part marked as x . | X क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2379; न&#2366;म बत&#2366;ए&#2404;<br/><img src='https://lh3.googleusercontent.com/-63bTzMiA8Fg/YEDThrTq4-I/AAAAAAAAI1w/EzhX6PP-WRkNJd0zhToBHphq_AC26OOwACLcBGAsYHQ/image.png'>",
+           options:["(A) Lip | ल&#2367;प ","(B) Land | ल&#2376;&#2306;ड","(C) Flank | फ&#2381;ल&#2375;&#2306;क ","(D) Point angle | ब&#2367;&#2306;द&#2369; क&#2379;ण"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Which type of taper is provided in the drill shank? | ड&#2381;र&#2367;ल श&#2375;&#2306;क म&#2375;&#2306; क&#2367;स प&#2381;रक&#2366;र क&#2366; ट&#2375;पर द&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Pin taper | प&#2367;न ट&#2375;पर ","(B) Metric taper | म&#2368;ट&#2381;र&#2367;क ट&#2375;पर","(C) Morse taper | म&#2379;र&#2381;स ट&#2375;&#2306;पर ","(D) Jerno taper | जर&#2381;न&#2379; ट&#2375;पर"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Which is used to remove drills and sockets from the machine spindle? | मश&#2368;न स&#2381;प&#2367;&#2306;डल स&#2375; ड&#2381;र&#2367;ल और स&#2377;क&#2375;ट न&#2367;क&#2366;लन&#2375; क&#2375; ल&#2367;ए क&#2367;सक&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Drift | ड&#2381;र&#2367;फ&#2381;ट","(B) Sleeve | स&#2381;ल&#2368;व ","(C) Punch | प&#2306;च ","(D) Hammer | हथ&#2380;ड&#2364;&#2366;"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Name the tap wrench used in the restricted place. | प&#2381;रत&#2367;ब&#2306;ध&#2367;त स&#2381;थ&#2366;न म&#2375;&#2306; उपय&#2379;ग क&#2367;ए ज&#2366;न&#2375; व&#2366;ल&#2375; ट&#2376;प र&#2367;&#2306;च क&#2366; न&#2366;म बत&#2366;इए&#2404; ",
+           options:["(A) Box type tap wrench | ब&#2377;क&#2381;स ट&#2366;इप ट&#2376;प र&#2367;&#2306;च ","(B) T handle tap wrench | ट&#2368; ह&#2376;&#2306;डल ट&#2376;प र&#2367;&#2306;च ","(C) Solid type tap wrench | स&#2377;ल&#2367;ड ट&#2366;इप ट&#2376;प र&#2367;&#2306;च ","(D) Double ended adjustable tap wrench | डबल ए&#2306;ड&#2375;ड एडजस&#2381;ट&#2375;बल ट&#2376;प र&#2367;&#2306;च"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. In the ISO metric thread, calculate the tap drill size for M 10 x 1.5 thread. | आईएसओ म&#2368;ट&#2381;र&#2367;क थ&#2381;र&#2375;ड म&#2375;&#2306;,M 10 x 1.5 थ&#2381;र&#2375;ड क&#2375; ल&#2367;ए ट&#2376;प ड&#2381;र&#2367;ल आक&#2366;र क&#2368; गणन&#2366; कर&#2375;&#2306;&#2404;",
+           options:["(A) 8.2 mm","(B) 8.7mm ","(C) 8.75 mm ","(D) 8.65 mm"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the unit of feed in drilling operation? | ड&#2381;र&#2367;ल&#2367;&#2306;ग ऑपर&#2375;शन म&#2375;&#2306; फ&#2368;ड क&#2368; इक&#2366;ई क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) m/rev","(B) mm/rev ","(C) m/min","(D) mm/min"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Name the part marked as x in vernier caliper. | वर&#2381;न&#2367;यर क&#2376;ल&#2367;पर म&#2375;&#2306; x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म बत&#2366;ए&#2404;<br/><img src='https://lh3.googleusercontent.com/-rsX_ohIGabg/YEDTl7VopDI/AAAAAAAAI14/zlkqs4FrGzAPpQXJ0IGuegJC4D9BrUV0wCLcBGAsYHQ/image.pnghttps://lh3.googleusercontent.com/-rsX_ohIGabg/YEDTl7VopDI/AAAAAAAAI14/zlkqs4FrGzAPpQXJ0IGuegJC4D9BrUV0wCLcBGAsYHQ/image.png'>",
+           options:["(A) Beam | ब&#2368;म ","(B) Fixed bar | फ&#2367;क&#2381;स&#2381;ड ब&#2366;र","(C) Depth bar | ड&#2375;प&#2381;थ ब&#2366;र ","(D) Thumb lever | थ&#2306;ब ल&#2368;वर"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the accuracy of protractor head in combination set? | स&#2306;य&#2379;जन स&#2375;ट (क&#2377;म&#2381;ब&#2367;न&#2375;शन स&#2375;ट) म&#2375;&#2306; प&#2381;र&#2379;ट&#2381;र&#2376;क&#2381;टर ह&#2375;ड क&#2368; पर&#2367;श&#2369;द&#2381;धत&#2366; (एक&#2381;य&#2370;र&#2375;स&#2368;) क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) 1&#176; ","(B) 5&#176; ","(C) 5&#8217; ","(D) 5&#8217;&#8217;"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. 69 What is the accuracy of a try square? | एक ट&#2381;र&#2366;ईस&#2381;क&#2381;व&#2366;यर क&#2368; पर&#2367;श&#2369;द&#2381;धत&#2366; (एक&#2381;य&#2370;र&#2375;स&#2368;) क&#2381;य&#2366; ह&#2376;? ",
+           options:["(A) 0.02 mm per 10 mm length","(B) 0.004 mm per 10 mm length","(C) 0.002 mm per 10 mm length","(D) 0.001 mm per 10 mm length  "],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Which punch is used for witness marks? || न&#2367;श&#2366;न द&#2367;खन&#2375; क&#2375; ल&#2367;ए क&#2367;स प&#2306;च क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Dot punch | ड&#2377;ट प&#2306;च","(B) Pin punch | प&#2367;न प&#2306;च","(C) Bell punch | ब&#2375;ल प&#2306;च ","(D) Centre punch | स&#2375;ण&#2381;टर प&#2306;च"],
+           answer:0,
+           
+       },
+      {
+           q:"Q. What is the name of the caliper having one leg with an adjustable divider point and other leg is bent? | उस क&#2376;ल&#2367;पर क&#2366; न&#2366;म बत&#2366;ए ज&#2367;सक&#2368; एक ट&#2366;&#2306;ग एडजस&#2381;ट&#2375;बल ड&#2367;व&#2366;इड प&#2377;इ&#2306;ट और द&#2370;सर&#2366; ट&#2366;&#2306;ग म&#2369;ड&#2364;&#2366; ह&#2379;त&#2368; ह&#2376;?",
+           options:["(A)  Jenny caliper | ज&#2375;न&#2368; क&#2376;ल&#2367;पर ","(B) Inside caliper | इनस&#2366;इड क&#2376;ल&#2368;पर","(C) Outside caliper | आउटस&#2366;इड क&#2376;ल&#2368;पर ","(D) Spring joint caliper | स&#2381;प&#2381;र&#2367;&#2306;ग ज&#2381;व&#2366;इ&#2306;ट क&#2376;ल&#2368;पर"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of part marked as x in surface gauge? | सतह ग&#2375;ज म&#2375;&#2306; x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-w92uBsxUO1M/YEDTo5Z79YI/AAAAAAAAI18/qKGTV7iXGMggs6r_gg2_lswRik-PS7V-ACLcBGAsYHQ/image.png'>",
+           options:["(A) Nut | नट ","(B) Snug  ","(C) Spindle | स&#2381;प&#2367;&#2306;डल ","(D) Scriber | स&#2381;क&#2381;र&#2366;इबर"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. What is the name of part marked as x in combination set? | स&#2306;य&#2379;जन स&#2375;ट (क&#2377;म&#2381;ब&#2367;न&#2375;शन स&#2375;ट) म&#2375;&#2306; x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-LtSOLMcWIog/YEDTulAVFOI/AAAAAAAAI2E/4MJ7dgi1oxcb1kAbxUA0-MSbCmIU2Q-1QCLcBGAsYHQ/image.png'>",
+           options:["(A) Bevel head | ब&#2375;वल ह&#2375;ड ","(B) Centre head | स&#2375;ण&#2381;टर ह&#2375;ड ","(C) Square head | स&#2381;क&#2381;व&#2366;यर ह&#2375;ड ","(D) Protractor head | प&#2381;र&#2379;ट&#2381;र&#2375;क&#2381;टर ह&#2375;ड"],
+           answer:3,
+       },
+       {
+           q:"Q. Which type of datum is followed? | क&#2367;स प&#2381;रक&#2366;र क&#2375; ड&#2375;टम क&#2366; प&#2366;लन क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-LQWAnyxA7GU/YEDT94Cz_gI/AAAAAAAAI2Q/cTONNMlfL30NJLmEo1mWEdbRXlT-8-aIQCLcBGAsYHQ/image.png'>",
+           options:["(A) Edge datum | एज ड&#2375;टम","B) Point datum | ब&#2367;&#2306;द&#2369; ड&#2375;टम ","(C) Centre line datum | क&#2375;&#2306;द&#2381;र र&#2375;ख&#2366; ड&#2375;टम ","(D) Reference line datum | स&#2306;दर&#2381;भ र&#2375;ख&#2366; ड&#2375;टम (र&#2375;फर&#2375;&#2306;स ल&#2366;इन ड&#2375;टम"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of parallel block? | इस सम&#2366;न&#2366;&#2306;तर ब&#2381;ल&#2377;क (प&#2376;र&#2375;लल ब&#2381;ल&#2366;क) क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-gc4AvXmIGao/YEDUA-97H2I/AAAAAAAAI2Y/B3Rk88Fv7yk_U7oWfj0ErzAnVTaUe8TvgCLcBGAsYHQ/image.png'>",
+           options:["(A) Solid parallel block | ठ&#2379;स सम&#2366;न&#2366;&#2306;तर ब&#2381;ल&#2377;क (स&#2377;ल&#2367;ड प&#2376;र&#2375;लल ब&#2381;ल&#2377;क)","(B) Tenon parallel block | त&#2375;नन सम&#2366;न&#2366;&#2306;तर ब&#2381;ल&#2377;क (ट&#2375;नन प&#2376;र&#2375;लल ब&#2381;ल&#2377;क)","(C) Angular parallel block | क&#2379;ण&#2368;य सम&#2366;न&#2366;&#2306;तर ब&#2381;ल&#2377;क (ए&#2306;ग&#2369;लर प&#2376;र&#2375;लल ब&#2381;ल&#2377;क)","(D) Adjustable parallel block |  एडजस&#2381;टबल प&#2376;र&#2375;लल ब&#2381;ल&#2377;क"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Which material is used to manufacture grade A V blocks? | ग&#2381;र&#2375;ड A V ब&#2381;ल&#2377;क क&#2375; न&#2367;र&#2381;म&#2366;ण क&#2375; ल&#2367;ए क&#2367;स मट&#2375;र&#2367;यल क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["(A) Tool steel | ट&#2370;ल स&#2381;ट&#2368;ल","(B) Carbon steel | क&#2366;र&#2381;बन स&#2381;ट&#2368;ल","(C) High quality steel | उच&#2381;च ग&#2369;णवत&#2381;त&#2366; व&#2366;ल&#2366; स&#2381;ट&#2368;ल ","(D) Closely grained cast iron | ब&#2366;र&#2368;क द&#2366;न&#2375;द&#2366;र व&#2366;ल&#2366; क&#2366;स&#2381;ट ल&#2379;ह&#2366;"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Which chisel is used for removing materials on the corners of the keyways? | क&#2369;&#2306;ज&#2368; म&#2366;र&#2381;ग क&#2375; क&#2379;न&#2379;&#2306; पर पद&#2366;र&#2381;थ&#2379;&#2306; क&#2379; हट&#2366;न&#2375; क&#2375; ल&#2367;ए क&#2367;स छ&#2375;न&#2368; क&#2366; प&#2381;रय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Flat chisel | फ&#2381;ल&#2376;ट छ&#2375;न&#2368;","(B) Diamond point chisel | ड&#2366;यम&#2306;ड प&#2377;इ&#2306;ट छ&#2375;न&#2368;","(C)cross cut chisel | क&#2381;र&#2377;स कट छ&#2375;न&#2368;","(D) Half round nose chisel | ह&#2366;फ र&#2366;उ&#2306;ड न&#2379;ज छ&#2375;न&#2368;"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Which file is having rows of teeth cut in one direction? | क&#2367;स फ&#2366;इल म&#2375;&#2306; एक द&#2367;श&#2366; म&#2375;&#2306; द&#2366;&#2306;त&#2379;&#2306; कट&#2375; ह&#2379;त&#2375; ह&#2376;? ",
+           options:["(A) Single cut file | स&#2367;&#2306;गल कट फ&#2366;इल","(B) Curved cut file | कर&#2381;व&#2375;ड कट फ&#2366;इल ","(C) Second cut file | स&#2375;क&#2306;ड कट फ&#2366;इल ","(D) Double cut file | डबल कट फ&#2366;इल"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Which file is used for filing wood and leather? | लकड&#2364;&#2368; और चमड&#2364;&#2375; क&#2368; फ&#2366;इल&#2367;&#2306;ग करन&#2375; क&#2375; ल&#2367;ए क&#2367;स फ&#2366;इल क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Hand file | ह&#2376;ण&#2381;ड फ&#2366;इल","(B) Bastard file | ब&#2366;स&#2381;टर&#2381;ड फ&#2364;&#2366;इल","(C) Rasp cut file | र&#2366;स&#2381;प कट फ&#2366;इल ","(D) Single cut file | स&#2367;&#2306;गल कट फ&#2366;इल"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Why the cutting faces of files are slightly bellied on length wise? | क&#2381;य&#2379;&#2306; फ&#2366;इल&#2379;&#2306; क&#2375; कट&#2367;&#2306;ग फ&#2375;स&#2375;स क&#2379; ल&#2306;ब&#2366;ई क&#2375; स&#2366;इड स&#2375; थ&#2379;ड&#2364;&#2366; ब&#2375;वल क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Get proper grip over workpiece | वर&#2381;कप&#2368;स पर उच&#2367;त पकड&#2364; प&#2381;र&#2366;प&#2381;त कर&#2375;&#2306; ","(B) Filing flat surfaces is made easier | फ&#2381;ल&#2376;ट सतह&#2379;&#2306; क&#2368; फ&#2366;इल&#2367;&#2306;ग आस&#2366;न करन&#2375; क&#2375; ल&#2367;ए ","(C) Permit clearance between file face and the workpiece | फ&#2364;&#2366;इल फ&#2375;स और वर&#2381;कप&#2368;स क&#2375; ब&#2368;च क&#2381;ल&#2368;यर&#2375;&#2306;स प&#2381;रद&#2366;न करन&#2375; क&#2375; ल&#2367;ए ","(D) Ensure more pressure on workpiece while filing | फ&#2366;इल&#2367;&#2306;ग करत&#2375; समय वर&#2381;कप&#2368;स पर अध&#2367;क दब&#2366;व स&#2369;न&#2367;श&#2381;च&#2367;त कर&#2375;&#2306;"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Which pitch of blade is used for cutting bronze, brass and cast iron? | ब&#2381;ल&#2375;ड क&#2368; क&#2367;स प&#2367;च क&#2366; उपय&#2379;ग क&#2366;&#2306;स&#2381;य, प&#2368;तल और क&#2366;स&#2381;ट आयरन क&#2366;टन&#2375; क&#2375; ल&#2367;ए क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["(A) 0.80 mm ","(B) 1.00 mm ","(C) 1.40 mm","(D) 1.80 mm"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. What happen if the clearance angle of chisel is too high? | यद&#2367; छ&#2375;न&#2368; क&#2366; क&#2381;ल&#2368;यर&#2375;&#2306;स क&#2379;ण बह&#2369;त अध&#2367;क ह&#2376; त&#2379; क&#2381;य&#2366; ह&#2379;ग&#2366;?",
+           options:["(A) Slipping of chisel","(B) Digging on the surface | सतह पर गड&#2381;ढ&#2366; कर द&#2375;ग&#2368; ","(C) cutting edge will break | कट&#2367;&#2306;ग एज ट&#2370;ट ज&#2366;एग&#2368;","(D) Heavy metal removal from the surface | सतह स&#2375; भ&#2366;र&#2368; ध&#2366;त&#2369; न&#2367;क&#2366;लन&#2366;"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Which type of hammer is used for riveting purpose? | क&#2367;स प&#2381;रक&#2366;र क&#2375; हथ&#2380;ड&#2364;&#2366; क&#2366; उपय&#2379;ग र&#2367;वरट&#2367;&#2306;ग उद&#2381;द&#2375;श&#2381;य क&#2375; ल&#2367;ए क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["(A) Sledge hammer | स&#2381;ल&#2375;ज ह&#2376;मर","(B) Ball pein hammer | ब&#2377;ल प&#2368;न ह&#2376;मर","(C) Cross pein hammer | क&#2381;र&#2377;स प&#2367;न ह&#2376;मर","(D) Straight pein hammer | स&#2381;ट&#2381;र&#2376;ट प&#2367;न ह&#2376;मर"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. What is the unit of cutting speed in drilling operation? | ड&#2381;र&#2367;ल&#2367;&#2306;ग ऑपर&#2375;शन म&#2375;&#2306; क&#2366;टन&#2375; क&#2368; गत&#2367; (कट&#2367;&#2306;ग स&#2381;प&#2368;ड) क&#2368; इक&#2366;ई क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) m/rev ","(B) mm/ rev ","(C) m/ min ","(D) mm/min"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the name of part marked as x in drill? | ड&#2381;र&#2367;ल म&#2375;&#2306; x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/--1olRDuc4Mw/YEDUEWrnIGI/AAAAAAAAI2c/mgDWjO3fKJoMp_Jo3iYCiMY5z4FAYmqNgCLcBGAsYHQ/image.png'>",
+           options:["(A) Lip | ल&#2367;प ","(B) Land | ल&#2376;&#2306;ड ","(C) Flank | फ&#2381;ल&#2375;&#2306;क ","(D) Web | व&#2375;ब"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of part marked as x in drilling machine? | ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न म&#2375;&#2306; x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-9eMmBE1rZvo/YEDUHmaLLfI/AAAAAAAAI2g/_qD0hRKfHJQnb6z14gWAr_SK4NYg8Pg8QCLcBGAsYHQ/image.png'>",
+           options:["(A) Drill chuck | ड&#2381;र&#2367;ल चक","(B) Feed handle | फ&#2368;ड ह&#2376;&#2306;डल ","(C) Driving motor | ड&#2381;र&#2366;इव&#2367;&#2306;ग म&#2379;टर","(D) Depth gauge and stop | ड&#2375;प&#2381;थ ग&#2375;ज और स&#2381;ट&#2377;प"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the minor diameter of thread? | थ&#2381;र&#2375;ड क&#2366; म&#2366;इनर व&#2381;य&#2366;स क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) Minor dia = Major dia - (2 x pitch) | म&#2366;इनर व&#2381;य&#2366;स = म&#2375;जर व&#2381;य&#2366;स - (2 x प&#2367;च)","(B)  Minor dia = Major dia + (2 x pitch) | म&#2366;इनर व&#2381;य&#2366;स = म&#2375;जर व&#2381;य&#2366;स + (2 x प&#2367;च) ","(C) Minor dia = Major dia + (2 x depth) | म&#2366;इनर व&#2381;य&#2366;स = म&#2375;जर व&#2381;य&#2366;स + (2 x गहर&#2366;ई) ","(D) Minor dia = Major dia &#8211; (2 x depth) | Hişol व&#2381;य&#2366;स = म&#2375;जर व&#2381;य&#2366;स - (2 x गहर&#2366;ई)"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. What is the name of the part marked as X ? | x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-Dx-SNzuN1r4/YEDUNvOwv-I/AAAAAAAAI2k/skm9M9wLtoUaLTJkBQqxNE90gw8OaFVqACLcBGAsYHQ/image.png'>",
+           options:["(A) Spindle | स&#2381;प&#2367;&#2306;डल क&#2381;षत&#2367; ","(B) Sleeve ","(C) Thimble | थ&#2367;म&#2381;ब&#2381;ल ","(D) Spindle lock | स&#2381;प&#2367;&#2306;डल ल&#2377;क"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the reading of the outside micrometer 50 to 75mm? | 50 स&#2375; 75 म&#2367;म&#2368; क&#2375; आउटस&#2366;इड म&#2366;इक&#2381;र&#2379;म&#2368;टर क&#2368; र&#2368;ड&#2367;&#2306;ग क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-w-7FZ4JOKbM/YEDURv74cTI/AAAAAAAAI2s/jrXyvtiAbFMCkPAhp1a1o397ITJEbFj4wCLcBGAsYHQ/image.png'>",
+           options:["(A) 63.63 mm ","(B) 63.00 mm ","(C) 63.36 mm ","(D) 63.13 mm"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of the part marked as X ? | x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-gy2wmLAKi4g/YEDUVt9tSkI/AAAAAAAAI20/gr2YnGRUnmYjF_FUMiV7tFr5ZRZ_XA6QwCLcBGAsYHQ/image.png'>",
+           options:["(A) Beam | ब&#2368;म","(B) Main scale | म&#2369;ख&#2381;य प&#2376;म&#2366;न&#2366; (म&#2375;न स&#2381;क&#2375;ल) ","(C) Fine adjusting nut | फ&#2366;इन एडजस&#2381;टइ&#2306;ग नट","(D) Fine adjusting slide | फ&#2366;इन एडजस&#2381;टइ&#2306;ग स&#2381;ल&#2366;इड"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. What is the name of the vice? | इस व&#2366;इस क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-Z_Lxj7_rRBo/YEDUYoRNUfI/AAAAAAAAI24/wOLM5CnD2Y4OCRHe1oA-xC-Dox-s7l7lgCLcBGAsYHQ/image.png'>",
+           options:["(A) Hand vice | ह&#2376;ण&#2381;ड व&#2366;ईस","(B) Bench vice | ब&#2375;&#2306;च व&#2366;इस","(C) Tool maker s vice | ट&#2370;ल म&#2375;कर&#2381;स व&#2366;ईस ","(D) Quick releasing vice | क&#2381;व&#2367;क र&#2367;ल&#2368;ज&#2367;&#2306;ग व&#2366;इस"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. What is the name of the part marked as X ? | x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-E2_euRUfF8k/YEDUbjvZg7I/AAAAAAAAI28/CvyG-TwFa9gMl3ug9MX6pW7RsiA3yHd2gCLcBGAsYHQ/image.png'>",
+           options:["(A) Tip | ट&#2367;प ","(B) Heel | ह&#2368;ल ","(C) Tang | ट&#2375;&#2306;ग ","(D) Safe edge | स&#2375;फ एज"],
+           answer:3,
+           
+       },
+      {
+           q:"Q. What is the name of operation? | इस ऑपर&#2375;शन क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-86sygUNgpOQ/YEDUd-5TL-I/AAAAAAAAI3E/s93laedbE_sPRLdUIYfE1eUe6ghrwYyEQCLcBGAsYHQ/image.png'>",
+           options:["(A) Marking line at 90&#176; | 90 ड&#2367;ग&#2381;र&#2368; पर अ&#2306;कन र&#2375;ख&#2366; ","(B) Checking flatness | समतलत&#2366; क&#2368; ज&#2366;&#2305;च करन&#2366; ","(C) Checking squareness | स&#2381;क&#2381;व&#2366;यरन&#2375;स क&#2368; ज&#2366;&#2305;च करन&#2366; ","(D) Setting work piece at right angle | सह&#2368; क&#2379;ण पर क&#2366;र&#2381;य खण&#2381;ड क&#2379; स&#2375;ट करन&#2366;"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Which marking media is applied to rough forgings and castings? | क&#2380;न स&#2368; म&#2366;र&#2381;क&#2367;&#2306;ग म&#2368;ड&#2367;य&#2366; क&#2379; रफ&#2364; फ&#2379;र&#2381;ज&#2367;&#2306;ग और क&#2366;स&#2381;ट&#2367;&#2306;ग पर लग&#2366;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) white wash | व&#2366;इट व&#2366;श","(B) Prussian blue | प&#2381;रश&#2367;यन ब&#2381;ल&#2370; ","(C) Copper sulphate | क&#2377;पर सल&#2381;फ&#2375;ट ","(D) Cellulose lacquer | स&#2375;ल&#2381;य&#2370;ल&#2379;ज ल&#2375;कर"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Which is used to finish the re-sharpened divider point? | प&#2369;न त&#2375;ज क&#2367;य&#2366; ह&#2369;आ ड&#2367;व&#2366;इड ब&#2367;&#2306;द&#2369; क&#2379; फ&#2367;न&#2367;श करन&#2375; क&#2375; ल&#2367;ए क&#2367;सक&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["(A)  File | फ&#2364;&#2366;इल ","(B) Grinder | ग&#2381;र&#2366;इ&#2306;डर ","(C) Scraper | ख&#2369;रचन&#2368; ","(D) Oil stone | आयल स&#2381;ट&#2379;न"],
+           answer:3,
+       },
+       {
+           q:"Q. What is the use of bevel protractor? | ब&#2375;व&#2375;ल प&#2381;र&#2379;ट&#2381;र&#2376;क&#2381;टर क&#2366; उपय&#2379;ग क&#2381;य&#2366; ह&#2376;?",
+           options:["(A)  Check the length | ल&#2306;ब&#2366;ई क&#2368; ज&#2366;&#2306;च ","B) Set the work piece | क&#2366;र&#2381;य खण&#2381;ड क&#2379; स&#2375;ट कर&#2375;&#2306;","(C) Measure the angle | क&#2379;ण क&#2379; म&#2366;पन&#2366;","(D) Measure the depth "],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Name the file shown. | द&#2367;ख&#2366;ई गई फ&#2364;&#2366;इल क&#2366; न&#2366;म द&#2375;&#2306;&#2404;<br/><img src='https://lh3.googleusercontent.com/-RIMGYB6s_R0/YEDUhS9RZlI/AAAAAAAAI3I/r0Y3_7EMS9g-M39sbW7fTcjUBwU84NeigCLcBGAsYHQ/image.png'>",
+           options:["(A) Riffler file | र&#2367;फ&#2381;ल&#2375;र फ&#2364;&#2366;इल","(B) Tinkers file | ट&#2367;&#2306;कर फ&#2366;इल ","(C) Barrette file | ब&#2376;र&#2375;ट फ&#2364;&#2366;इल ","(D) crossing file | क&#2381;र&#2379;स&#2367;&#2306;ग फ&#2366;इल"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Which vice is used for holding hollow cylindrical jobs? | ख&#2379;खल&#2368; ब&#2375;लन&#2366;क&#2366;र ज&#2377;ब&#2381;स क&#2379; पकड&#2364;न&#2375; क&#2375; ल&#2367;ए क&#2367;स व&#2366;इस क&#2366; इस&#2381;त&#2375;म&#2366;ल क&#2367;य&#2366; गय&#2366;?",
+           options:["(A) Pin vice | प&#2367;न व&#2366;इस","(B) Pipe vice | प&#2366;इप व&#2366;इस ","(C) Hand vice | ह&#2376;ण&#2381;ड व&#2366;इस ","(D) Bench vice | ब&#2375;&#2306;च व&#2366;इस"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the pitch of hacksaw blade used to cut conduit and other thin tubes? | क&#2366;न&#2381;ड&#2370;इट और अन&#2381;य पतल&#2368; ट&#2381;य&#2370;ब क&#2379; क&#2366;टन&#2375; क&#2375; ल&#2367;ए ह&#2376;कस&#2377; ब&#2381;ल&#2375;ड क&#2375; क&#2367;स प&#2367;च क&#2366; उपय&#2379;ग क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) 0.8mm ","(B) 1.0mm ","(C) 1.4mm ","(D)  1.8mm"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Which metal cutting saw is used for cutting different profiles? | व&#2367;भ&#2367;न&#2381;न प&#2381;र&#2379;फ&#2366;इल क&#2379; क&#2366;टन&#2375; क&#2375; ल&#2367;ए क&#2367;स ध&#2366;त&#2369; क&#2366;टन&#2375; व&#2366;ल&#2368; स&#2377; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366;  ह&#2376;?",
+           options:["(A) Power saw | प&#2377;वर स&#2377; ","(B) Circular saw | सर&#2381;क&#2369;लर स&#2377;","(C) Contour band saw | क&#2306;ट&#2370;र ब&#2376;&#2306;ड स&#2377; ","(D) Horizontal band saw | ह&#2377;र&#2367;ज&#2377;न&#2381;टल ब&#2376;&#2306;ड स&#2366;&#2305;"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the reason for scratches produced on filed surface? | फ&#2366;इल व&#2366;ल&#2368; सरफ&#2375;स पर खर&#2379;&#2306;च च&#2367;प&#2381;स क&#2375; उत&#2381;प&#2366;दन क&#2366; क&#2366;रण क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) Pinning | प&#2367;न&#2367;&#2306;ग ","(B) Glazing | ग&#2381;ल&#2375;ज&#2367;&#2306;ग","(C) File bite | फ&#2364;&#2366;इल ब&#2366;ईट ","(D)  warping | व&#2377;र&#2381;पइ&#2306;ग"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of chisel? | इस छ&#2375;न&#2368; क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-eDBT44gVv24/YEDUje-8ATI/AAAAAAAAI3M/BmingzDJ4qk4GXi6KCd2Fd6T-Dc81Z74QCLcBGAsYHQ/image.png'>",
+           options:["(A) Flat chisel | सप&#2366;ट छ&#2375;न&#2368; (फ&#2381;ल&#2376;ट छ&#2375;न&#2368;)","(B) Web chisel | व&#2375;ब छ&#2375;न&#2368; ","(C) Cross cut chisel | क&#2381;र&#2377;स कट छ&#2375;न&#2368;","(D) Diamond point chisel | ड&#2366;यम&#2306;ड प&#2377;इ&#2306;ट छ&#2375;न&#2368;"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Why slight convexity is given on the face of hammer? | क&#2381;य&#2379;&#2306; हथ&#2380;ड&#2364;&#2366; क&#2375; च&#2375;हर&#2375; पर थ&#2379;ड&#2364;&#2368; उत&#2381;तलत&#2366; द&#2368;  ज&#2366;त&#2368; ह&#2376;? ",
+           options:["(A) To make effective striking | प&#2381;रभ&#2366;व&#2368; च&#2379;ट बन&#2366;न&#2375; क&#2375; ल&#2367;ए ","(B) To avoid digging of the edge | क&#2367;न&#2366;र&#2375; क&#2368; ख&#2369;द&#2366;ई स&#2375; बचन&#2375; क&#2375; ल&#2367;ए","(C) To allow even load on striking | च&#2379;ट मरत&#2375; समय एक सम&#2366;न ल&#2379;ड क&#2368; अन&#2369;मत&#2367; द&#2375;न&#2375; क&#2375; ल&#2367;ए","(D) o prevent damage to work surface | क&#2366;म क&#2368; सतह क&#2379; न&#2369;कस&#2366;न क&#2379; र&#2379;कन&#2375; क&#2375; ल&#2367;ए"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. hat is the name of hammer? | इस हथ&#2380;ड&#2364;&#2366; क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-79UHI1RF6qY/YEDUmP34nlI/AAAAAAAAI3Q/ICQg1qCkbkwaj5OWHe-sdZola8rNO-CEACLcBGAsYHQ/image.png'>",
+           options:["(A) Mallet hammer | म&#2376;ल&#2375;ट हथ&#2380;ड&#2364;&#2366;","(B) Ball pein hammer | ब&#2377;ल प&#2368;न हथ&#2380;ड&#2364;&#2366;","(C) Cross pein hammer | क&#2381;र&#2377;स प&#2367;न हथ&#2380;ड&#2364;&#2366; ","(D) Straight pein hammer | स&#2381;ट&#2381;र&#2376;ट प&#2367;न हथ&#2380;ड&#2364;&#2366;"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the name of angle between the axis of chisel and job surface while chipping? || च&#2367;प&#2367;&#2306;ग करत&#2375; समय छ&#2375;न&#2368; क&#2375; अक&#2381;ष और ज&#2377;ब क&#2368; सतह क&#2375; ब&#2368;च क&#2375; क&#2379;ण क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) Rake angle | र&#2375;क क&#2379;ण ","(B) Point angle | ब&#2367;&#2306;द&#2369;क&#2379;ण","(C) Clearance angle | क&#2381;ल&#2368;यर&#2375;&#2306;स क&#2379;ण","(D) Angle of inclination | ए&#2306;गल ऑफ&#2364; इन&#2381;क&#2381;लन&#2375;शन"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. What is the property of metal that permits no permanent distortion before breaking? | ध&#2366;त&#2369; क&#2368; वह प&#2381;र&#2377;पर&#2381;ट&#2368; क&#2381;य&#2366; ह&#2376; ज&#2379; ट&#2370;टन&#2375; स&#2375; पहल&#2375; क&#2379;ई स&#2381;थ&#2366;य&#2368; व&#2367;क&#2371;त&#2367; क&#2368; अन&#2369;मत&#2367; नह&#2368;&#2306; द&#2375;त&#2368; ह&#2376;? ",
+           options:["(A) Tenacity | टन&#2376;स&#2367;ट&#2368; ","(B) Hardness | ह&#2366;र&#2381;डन&#2375;स","(C) Brittleness | भ&#2306;ग&#2369;रत&#2366; ","(D) Toughness | टफन&#2375;स"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Name the part marked as x in depth micrometre. | गहर&#2366;ई म&#2366;इक&#2381;र&#2379;म&#2368;टर म&#2375;&#2306; x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2379; न&#2366;म बत&#2366;ए&#2404;<br/><img src='https://lh3.googleusercontent.com/-Qhbpd9jfPmM/YEDUuGsyXNI/AAAAAAAAI3c/brJe-ls3cxoz2ErsFDapzo2FQQwjJ7v3wCLcBGAsYHQ/image.png'>",
+           options:["(A) cap | क&#2376;प ","(B) Lock | ल&#2377;क ","(C) Stock | स&#2381;ट&#2377;क ","(D) Thimble "],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Why the hand taps are chamfered at the lead? | क&#2381;य&#2379;&#2306; ह&#2376;ण&#2381;ड ट&#2376;प ल&#2368;ड पर चम&#2381;फ&#2375;र क&#2367;य&#2375; ज&#2366;त&#2375; ह&#2376; ?",
+           options:["(A) Aligning | अल&#2367;ग&#2381;न&#2367;&#2306;ग क&#2375; ल&#2367;ए ","(B)  Finishing | फ&#2367;न&#2367;श&#2367;&#2306;ग क&#2375; ल&#2367;ए","(C) Strengthening | स&#2381;ट&#2381;र&#2375;&#2306;ग&#2381;थइ&#2306;ग क&#2375; ल&#2367;ए ","(D) Gripping | ग&#2381;र&#2367;प&#2367;&#2306;ग क&#2375; ल&#2367;ए"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of drilling machine? | इस ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-4BQ5ixsjH2k/YEDUwzd_mvI/AAAAAAAAI3g/62_h5V6kjxk-MJdkmhmeAG6jvNMiClenACLcBGAsYHQ/image.png'>",
+           options:["(A) Pillar drilling machine | प&#2367;लर ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न","(B) Gang drilling machine | ग&#2376;&#2306;ग ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न ","(C) Bench drilling machine | ब&#2375;&#2306;च ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न ","(D) Radial drilling machine | र&#2375;ड&#2367;यल ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the reading of an outside micrometer (British)? | इस ब&#2366;हर&#2368; म&#2366;इक&#2381;र&#2379;म&#2368;टर (ब&#2381;र&#2367;ट&#2367;श) क&#2368; र&#2368;ड&#2367;&#2306;ग क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-sdq0m8Va6EQ/YEDUy-vuW9I/AAAAAAAAI3o/QY8I4Ms8z9AQReIi5VxUL6QwaygZXWgUwCLcBGAsYHQ/image.png'>",
+           options:["(A) 0.309","(B) 0.329","(C) 0.359","(D) 0.360"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the accuracy of Vernier bevel protractor? | वर&#2381;न&#2367;यर ब&#2375;वल प&#2381;र&#2379;ट&#2381;र&#2376;क&#2381;टर क&#2368; सट&#2368;कत&#2366; क&#2381;य&#2366;",
+           options:["(A) 1&#176; ","(B) 5&#176; ","(C) 5&#8217;","(D) 5"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the reading of vernier caliper? | इस वर&#2381;न&#2367;यर क&#2376;ल&#2367;पर क&#2368; र&#2368;ड&#2367;&#2306;ग क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-I3A3LhdUGU0/YEDU2VRrW2I/AAAAAAAAI3w/rwN978_7Zh8T0uHlo_nlCafPi9X5CyzggCLcBGAsYHQ/image.png'>",
+           options:["(A) 30.20mm ","(B) 30.40mm","(C) 35.20mm ","(D) 35.50mm"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Why surface plates are made of stress relieved good quality cast iron? | क&#2381;य&#2379;&#2306; सतह प&#2381;ल&#2375;ट&#2379;&#2306; तन&#2366;व म&#2369;क&#2381;त अच&#2381;छ&#2368; क&#2366;स&#2381;ट आयरन स&#2375; बन&#2375; ह&#2379;त&#2375; ह&#2376;&#2306;?",
+           options:["(A) To prevent corrosion | क&#2381;षरण क&#2379; र&#2379;कन&#2375; क&#2375; ल&#2367;ए ","(B) To prevent breaking | ट&#2370;टन&#2375; स&#2375; र&#2379;कन&#2375; क&#2375; ल&#2367;ए ","(C) To prevent distortion | व&#2367;क&#2371;त&#2367; क&#2379; र&#2379;कन&#2375; क&#2375; ल&#2367;ए","(D) To prevent thermal expansion | थर&#2381;मल व&#2367;स&#2381;त&#2366;र क&#2379; र&#2379;कन&#2375; क&#2375; ल&#2367;ए"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the main advantage of adjustable parallel block? | सम&#2366;य&#2379;ज&#2381;य सम&#2366;न&#2366;&#2306;तर ब&#2381;ल&#2377;क (एडजस&#2381;ट&#2375;बल प&#2376;र&#2375;लल ब&#2381;ल&#2366;क) क&#2366; म&#2369;ख&#2381;य ल&#2366;भ क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) To set different angle | व&#2367;भ&#2367;न&#2381;न क&#2379;ण न&#2367;र&#2381;ध&#2366;र&#2367;त करन&#2375; क&#2375; ल&#2367;ए ","(B) To set different depth | व&#2367;भ&#2367;न&#2381;न गहर&#2366;ई न&#2367;र&#2381;ध&#2366;र&#2367;त करन&#2375; क&#2375; ल&#2367;ए ","(C) To set different length | व&#2367;भ&#2367;न&#2381;न ल&#2306;ब&#2366;ई न&#2367;र&#2381;ध&#2366;र&#2367;त करन&#2375; क&#2375; ल&#2367;ए","(D) To set different height "],
+           answer:3,
+           
+       },
+      {
+           q:"Q. Which part of universal surface gauge is used to set scriber at required position exactly? | य&#2370;न&#2367;वर&#2381;सल सरफ&#2375;स ग&#2375;ज क&#2375; क&#2367;स भ&#2366;ग क&#2366; उपय&#2379;ग आवश&#2381;यक सह&#2368; प&#2379;ज&#2368;शन पर स&#2381;क&#2381;र&#2366;इबर स&#2375;ट करन&#2375; क&#2375; ल&#2367;ए क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["(A) Snug","(B) Guide pin | ग&#2366;इड प&#2367;न ","(C) Rocker arm | र&#2377;कर आर&#2381;म ","(D) Fine adjustment screw | फ&#2366;इन एडजस&#2381;टम&#2375;&#2306;ट स&#2381;क&#2381;र&#2370;"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Convert one metre into millimetre. | एक म&#2368;टर क&#2379; म&#2367;ल&#2368;म&#2368;टर म&#2375;&#2306; बदल&#2375;&#2306;&#2404; ",
+           options:["(A) 10 mm ","(B) 100 mm","(C) 1000 mm ","(D) 10000 mm"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the name of V block?<br/><img src='https://lh3.googleusercontent.com/-XdfEO4XXFcI/YEDU4cln0gI/AAAAAAAAI30/a2ixZ_JC7SI05JZfTomZEHAb2jToFaaMwCLcBGAsYHQ/image.png'>",
+           options:["(A) V grooved V block | V ग&#2381;र&#2370;व&#2375;ड V ब&#2381;ल&#2377;क ","(B) Single level single groove v block | स&#2367;&#2306;गल ल&#2375;वल स&#2367;&#2306;गल ग&#2381;र&#2370;व V ब&#2381;ल&#2377;क ","(C) Double level single groove V block | डबल ल&#2375;वल स&#2367;&#2306;गल ग&#2381;र&#2370;व V ब&#2381;ल&#2377;क","(D) Single level double groove V block | स&#2367;&#2306;गल ल&#2375;वल डबल ग&#2381;र&#2370;व V ब&#2381;ल&#2377;क"],
+           answer:1,
+       },
+       {
+           q:"Q. What is the name of the part marked as x in combination set? | स&#2306;य&#2379;जन स&#2375;ट (क&#2377;म&#2381;ब&#2367;न&#2375;शन स&#2375;ट) म&#2375;&#2306; x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-95Vb5isUL1M/YEDU6dqNt3I/AAAAAAAAI34/h3VJ4OmNi-YzIimnLo2R06nfu67ZyDsPwCLcBGAsYHQ/image.png'>",
+           options:["(A) Rule | र&#2370;ल","B) Scriber | स&#2381;क&#2381;र&#2366;इबर","(C) Clamp nut | क&#2381;ल&#2376;&#2306;प नट ","(D) Spirit level | स&#2381;प&#2367;र&#2367;ट ल&#2375;वल"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Which caliper is used to find the centre of round bars? | र&#2366;उ&#2306;ड ब&#2366;र क&#2375; क&#2375;&#2306;द&#2381;र क&#2379; ख&#2379;जन&#2375; क&#2375; ल&#2367;ए क&#2367;स क&#2376;ल&#2368;पर क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["(A) Inside caliper | इनस&#2366;इड क&#2376;ल&#2367;पर","(B) Jenny caliper | ज&#2375;न&#2368; क&#2376;ल&#2367;पर ","(C) Vernier caliper | वर&#2381;न&#2367;यर क&#2376;ल&#2368;पर&#2381;स ","(D) outside caliper | आउटस&#2366;इड क&#2376;ल&#2367;पर"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. What is the name of angle marked a in chisel? | छ&#2375;न&#2368; म&#2375; a स&#2375; च&#2367;ह&#2381;न&#2367;त क&#2379;ण क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376; ?<br/><img src='https://lh3.googleusercontent.com/-yIUjEPSPHtM/YEDU-CS0RQI/AAAAAAAAI38/-P_Zn76qPCMvh8EmHyrG2fCP5g4yni4mQCLcBGAsYHQ/image.png'>",
+           options:["(A) Rake angle | र&#2375;क क&#2379;ण ","(B) Wedge angle | व&#2376;ज क&#2379;ण","(C) Cutting angle | कट&#2367;&#2306;ग ए&#2306;गल ","(D) Clearance angle | न&#2367;क&#2366;स&#2368; क&#2379;ण (क&#2381;ल&#2368;यर&#2375;&#2306;स क&#2379;ण)"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Which chisel is used for cutting curved grooves? | घ&#2369;म&#2366;वद&#2366;र ग&#2381;र&#2369;व&#2375;स क&#2379; क&#2366;टन&#2375; क&#2375; ल&#2367;ए क&#2367;स छ&#2375;न&#2368; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["(A) Flat chisel | फ&#2381;ल&#2376;ट छ&#2375;न&#2368;","(B) Web chisel | व&#2375;ब छ&#2375;न&#2368;","(C) Cross cut chisel | क&#2381;र&#2377;स कट छ&#2375;न&#2368; ","(D) Half round nose chisel | ह&#2366;फ र&#2366;उ&#2306;ड न&#2379;ज छ&#2375;न&#2368;"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. What is the weight of hammer used for marking purpose? | म&#2366;र&#2381;क&#2367;&#2306;ग उद&#2381;द&#2375;श&#2381;य क&#2375; ल&#2367;ए उपय&#2379;ग क&#2367;ए ज&#2366;न&#2375; व&#2366;ल&#2375; हथ&#2380;ड&#2364;&#2366; क&#2366; वजन क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) 200 grams","(B) 250 grams ","(C) 300 grams","(D) 450 grams"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. What is the effect of improper method of diagonal filing? | व&#2367;कर&#2381;ण फ&#2366;इल&#2367;&#2306;ग क&#2375; अन&#2369;च&#2367;त तर&#2368;क&#2375; क&#2366; प&#2381;रभ&#2366;व क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) Uneven surface finish | असम&#2366;न फ&#2367;न&#2367;श सतह","(B) Scratches on the surface | सतह पर खर&#2379;&#2306;च ","(C) Convexity on the surface | सतह पर उत&#2381;तलत&#2366; ","(D)  Improper finish on surface | सतह पर सह&#2368; फ&#2367;न&#2367;श न ह&#2379;न&#2366;"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Which chisel is used to remove excess metal from welded joint and castings? | व&#2375;ल&#2381;ड&#2375;ड ज&#2377;इ&#2306;ट और क&#2366;स&#2381;ट&#2367;&#2306;ग स&#2375; अत&#2367;र&#2367;क&#2381;त ध&#2366;त&#2369; क&#2379; हट&#2366;न&#2375; क&#2375; ल&#2367;ए क&#2367;स छ&#2375;न&#2368; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Flat chisel   ","(B) Web chisel | व&#2375;ब छ&#2375;न&#2368; ","(C) cross cut chisel | क&#2381;र&#2377;स कट छ&#2375;न&#2368; ","(D) Half round chisel | ह&#2366;फ र&#2366;उ&#2306;ड छ&#2375;न&#2366;"],
+           answer:0,
+           
+       },
+                {
+           q:"Q. Why chalk is applied on the face of the file? | फ&#2364;&#2366;इल क&#2375; फ&#2375;स पर च&#2377;क क&#2381;य&#2379;&#2306; लग&#2366;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) To reduce excessive pressure | अत&#2381;यध&#2367;क दब&#2366;व क&#2379; कम करन&#2375; क&#2375; ल&#2367;ए","(B) To increase chip removed rate | च&#2367;प हट&#2366;न&#2375; क&#2368; दर क&#2379; बढ&#2364;&#2366;न&#2375; क&#2375; ल&#2367;ए ","(C) To reduce penetration and pinning | प&#2375;न&#2367;ट&#2381;र&#2375;शन और प&#2367;न&#2367;&#2306;ग क&#2379; कम करन&#2375; क&#2375; ल&#2367;ए ","(D) To increase penetration and pinning | प&#2375;न&#2367;ट&#2381;र&#2375;शन और प&#2367;न&#2367;&#2306;ग क&#2379; बढ&#2364;&#2366;न&#2375; क&#2375; ल&#2367;ए"],
+           answer:2,
+       },
+       {
+           q:"Q. What is the use of fine pitch hacksaw blades? | फ&#2366;इन प&#2367;च ह&#2376;कस&#2377; ब&#2381;ल&#2375;ड क&#2366; उपय&#2379;ग क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) To cut soft metal | म&#2369;ल&#2366;यम ध&#2366;त&#2369; क&#2379; क&#2366;टन&#2375; क&#2375; ल&#2367;ए ","(B) To cut high speed steel | ह&#2366;ई स&#2381;प&#2368;ड स&#2381;ट&#2368;ल क&#2379; क&#2366;टन&#2375; क&#2375; ल&#2367;ए ","(C)  To cut high carbon steel | ह&#2366;ई क&#2366;र&#2381;बन स&#2381;ट&#2368;ल क&#2379; क&#2366;टन&#2375; क&#2375; ल&#2367;ए ","(D) To cut conduit and other thin tubes | क&#2366;न&#2381;ड&#2370;इट और अन&#2381;य पतल&#2368; ट&#2381;य&#2370;ब&#2379;&#2306; क&#2379; क&#2366;टन&#2375; क&#2375; ल&#2367;ए"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Calculate the tap drill size for M10 x 1.25. || M10 x 1.25 क&#2375; ल&#2367;ए ट&#2376;प ड&#2381;र&#2367;ल स&#2366;इज&#2364; क&#2368; गणन&#2366; कर&#2375;&#2306;&#2404; ",
+           options:["(A) 8.8 mm ","(B)  8.7 mm","(C) 8.75 mm","(D)  8.65 mm"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of portion left between flutes in a drill? | एक ड&#2381;र&#2367;ल म&#2375;&#2306; फ&#2381;ल&#2370;ट&#2375;स क&#2375; ब&#2368;च क&#2375; भ&#2366;ग क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;? ",
+           options:["(A) Lip | ल&#2367;प","(B) Web | व&#2375;ब","(C) Point | प&#2377;इ&#2306;ट ","(D) Shank | श&#2375;&#2306;क"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. What is the reading of vernier bevel protractor? | इस वर&#2381;न&#2367;यर ब&#2375;वल प&#2381;र&#2379;ट&#2381;र&#2376;क&#2381;टर क&#2368; र&#2368;ड&#2367;&#2306;ग क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-tMCnpMD1cN8/YEDVDLICuOI/AAAAAAAAI4E/d98cs7q18JUTp9nLn74OII3rSYWrntwzACLcBGAsYHQ/image.png'>",
+           options:["(A) 27&#176;30' ","(B) 67&#176; 30' ","(C) 157&#176; 30'","(D)  159&#176; 30'"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Which part of outside micrometer ensure a uniform pressure between the measuring surface? || ब&#2366;हर&#2368; म&#2366;इक&#2381;र&#2379;म&#2368;टर क&#2366; क&#2380;न स&#2366; भ&#2366;ग म&#2366;पन&#2375; क&#2368; सतह क&#2375; ब&#2368;च एक सम&#2366;न दब&#2366;व स&#2369;न&#2367;श&#2381;च&#2367;त करत&#2366; ह&#2376;?",
+           options:["(A) Anvil | न&#2367;ह&#2366;ई","(B) Thimble | न&#2379;क","(C) Spindle lock | स&#2381;प&#2367;&#2306;डल ल&#2377;क","(D) Ratchet stop | रच&#2375;ट स&#2381;ट&#2377;प"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Which part of the vernier height gauge is an intergral part of the main slide? | वर&#2381;न&#2367;यर ह&#2366;इट ग&#2375;ज क&#2366; क&#2380;न स&#2366; प&#2366;र&#2381;ट म&#2369;ख&#2381;य स&#2381;ल&#2366;इड क&#2366; एक इ&#2306;टरग&#2381;रल प&#2366;र&#2381;ट ह&#2376;?",
+           options:["(A) Jaw | ज&#2377;","(B)  Base | ब&#2375;स ","(C) Beam | ब&#2368;म","(D) Jaw clamp"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the principle of micrometer? || म&#2366;इक&#2381;र&#2379;म&#2368;टर क&#2366; स&#2367;द&#2381;ध&#2366;&#2306;त क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) Sliding | स&#2381;ल&#2366;इड&#2367;&#2306;ग ","(B) Screw and nut | स&#2381;क&#2381;र&#2370; और नट","(C)  Rack and pinion | र&#2376;क और प&#2367;न&#2367;यन","(D) Worm and worm wheel | वर&#2381;म और वर&#2381;म व&#2381;ह&#2368;ल"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. How the wide range of depth can be measured by depth micrometer? | ड&#2375;प&#2381;थ म&#2366;इक&#2381;र&#2379;म&#2368;टर द&#2381;व&#2366;र&#2366; ज&#2381;य&#2366;द&#2366; र&#2375;&#2306;ज क&#2368; गहर&#2366;ई क&#2379; क&#2376;स&#2375; म&#2366;प&#2366; ज&#2366; सकत&#2366; ह&#2376;?",
+           options:["(A) Lengthy sleeve | लम&#2381;ब&#2368; स&#2381;ल&#2368;व क&#2375; द&#2381;व&#2366;र&#2366;","(B)  Lengthy spindle | लम&#2381;ब&#2368; स&#2381;प&#2367;&#2306;डल क&#2375; द&#2381;व&#2366;र&#2366;","(C) Adjustable base | सम&#2366;य&#2379;ज&#2381;य ब&#2375;स क&#2375; द&#2381;व&#2366;र&#2366; ","(D) Equipped with a set of extension rods || एक&#2381;सट&#2375;&#2306;शन र&#2377;ड&#2381;स क&#2375; एक स&#2375;ट क&#2375; द&#2381;व&#2366;र&#2366;"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. What is the reading in inch micrometer? | इ&#2306;च म&#2366;इक&#2381;र&#2379;म&#2368;टर म&#2375;&#2306; इसक&#2368; र&#2368;ड&#2367;&#2306;ग क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-TOvrppsnlCw/YEDVJjxklJI/AAAAAAAAI4Q/eEZxeOkq2SMNAgFDANAHVyOyO3dUbuoLACLcBGAsYHQ/image.png'>",
+           options:["(A) 0.789 ","(B) 0.787 ","(C)  0.783","(D) 0.715"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Which part of the bevel protractor contact with the inclined surface while measuring? | म&#2366;पन&#2375;  क&#2375; द&#2380;र&#2366;न ब&#2375;वल प&#2381;र&#2379;ट&#2381;र&#2375;क&#2381;टर क&#2366; क&#2380;न स&#2366; ह&#2367;स&#2381;स&#2366; इन&#2381;क&#2381;ल&#2366;इन&#2381;ड सतह क&#2375; क&#2366;&#2306;ट&#2375;क&#2381;ट म&#2375; ह&#2379;त&#2366; ह&#2376; ?",
+           options:["(A) Dial ","(B) Disc | ड&#2367;स&#2381;क","(C) Blade | ब&#2381;ल&#2375;ड ","(D) Stock "],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Which part in drilling machine is to achieve different speed? | ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न म&#2375;&#2306; क&#2380;न स&#2366; भ&#2366;ग व&#2367;भ&#2367;न&#2381;न गत&#2367; प&#2381;र&#2366;प&#2381;त करन&#2375; क&#2375; ल&#2367;ए ह&#2376;?",
+           options:["(A) Flat pulley | फ&#2381;ल&#2376;ट प&#2369;ल&#2381;ल&#2368;","(B) Jockey pulley | ज&#2377;क&#2368; प&#2369;ल&#2381;ल&#2368;","(C) Stepped pulley ","(D) Fast and loose pulley | फ&#2364;&#2366;स&#2381;ट ए&#2306;ड ल&#2370;स प&#2369;ल&#2381;ल&#2368;"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. What is the part marked as x in pedestal grinder? | प&#2375;डस&#2381;टल ग&#2381;र&#2366;इ&#2306;डर म&#2375;&#2306; x क&#2375; र&#2370;प म&#2375;&#2306; च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-GVcUk0VC3GE/YEDVOl51PUI/AAAAAAAAI4Y/6GRnkxEMD3EVr2A2Rtiu-h3fvJai-ZBNgCLcBGAsYHQ/image.png'>",
+           options:["(A) Tool rest | ट&#2370;ल र&#2375;स&#2381;ट","(B) Eye shield | ऑय श&#2368;ल&#2381;ड ","(C)  Wheel guard | व&#2381;ह&#2368;ल ग&#2366;र&#2381;ड ","(D) Grinding wheel | ग&#2381;र&#2366;इ&#2306;ड&#2367;&#2306;ग व&#2381;ह&#2368;ल"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of file? | इस फ&#2364;&#2366;इल क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-MCWXO7xDf5A/YEDVSU2ib2I/AAAAAAAAI4c/QoUURl_SXREfxZUsM9YQLtxS0VJwnYIagCLcBGAsYHQ/image.png'>",
+           options:["(A) Hand file | ह&#2376;ण&#2381;ड फ&#2366;इल ","(B) Rasp cut file | र&#2366;स&#2381;प कट फ&#2366;इल ","(C) Single cut file | स&#2367;&#2306;गल कट फ&#2366;इल ","(D)  Curved cut file | कर&#2381;व&#2375;ड कट फ&#2366;इल"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. What happens if the vice handle is over tightened? | अगर व&#2366;इस ह&#2376;&#2306;डल क&#2379; ज&#2381;य&#2366;द&#2366; ट&#2366;इट कर द&#2367;य&#2366; ज&#2366;ए त&#2379; क&#2381;य&#2366; ह&#2379;ग&#2366;?",
+           options:["(A) Spindle damage | स&#2381;प&#2367;&#2306;डल क&#2368; क&#2381;षत&#2367;","(B) Hard jaw damage | कठ&#2379;र जबड&#2364;&#2375; क&#2368; क&#2381;षत&#2367;","(C) Fixed jaw damage | फ&#2367;क&#2381;स&#2381;ड जबड&#2364;&#2375; क&#2368; क&#2381;षत&#2367; ","(D)  Movable jaw damage | म&#2370;व&#2375;बल जबड&#2364;&#2375; क&#2368; क&#2381;षत&#2367;"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Which caliper provide fine adjustment of dimensions? | क&#2380;न स&#2366; क&#2376;ल&#2368;पर आय&#2366;म&#2379;&#2306; क&#2366; फ&#2366;इन एडजस&#2381;टम&#2375;&#2306;ट प&#2381;रद&#2366;न करत&#2366; ह&#2376;?",
+           options:["(A) Inside caliper | इनस&#2366;इड क&#2376;ल&#2367;पर","(B) Odd leg caliper | ओड ल&#2375;ग क&#2376;ल&#2367;पर","(C) outside caliper | आउटस&#2366;इड क&#2376;ल&#2368;पर ","(D) Spring joint caliper | स&#2381;प&#2381;र&#2367;&#2306;ग ज&#2381;व&#2366;इ&#2306;ट क&#2376;ल&#2368;पर"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Which metal cutting saw is used to cut large cross section area? | बड&#2364;&#2375; क&#2381;र&#2377;स स&#2375;क&#2381;शन एर&#2367;य&#2366; क&#2379; क&#2366;टन&#2375; क&#2375; ल&#2367;ए क&#2367;स म&#2375;टल कट&#2367;&#2306;ग स&#2377; क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["(A) Power saw | प&#2377;वर स&#2366;&#2305;","(B) Contour saw | क&#2306;ट&#2370;र स&#2377; ","(C) Circular saw | सर&#2381;क&#2369;लर स&#2377;","(D) Horizontal band saw | ह&#2377;र&#2367;ज&#2377;न&#2381;टल ब&#2376;&#2306;ड स&#2377;"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Why marking tables are made up of cast iron? | म&#2366;र&#2381;क&#2367;&#2306;ग ट&#2375;बल क&#2379; क&#2366;स&#2381;ट आयरन स&#2375; क&#2381;य&#2379;&#2306; बन&#2366;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Self lubricating | स&#2381;वय&#2306; ल&#2370;ब&#2381;र&#2367;क&#2376;शन ","(B) Make more rigidity | अध&#2367;क कठ&#2379;रत&#2366; बन&#2366;ए&#2306;","(C) Maintain the accuracy | सट&#2368;कत&#2366; बन&#2366;ए रख&#2375;&#2306; ","(D) Prevent thermal expansion | थर&#2381;मल व&#2367;स&#2381;त&#2366;र क&#2379; र&#2379;क&#2375;&#2306;"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of gauge? | इस ग&#2375;ज क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-HGRlZhx6JkU/YEDVU3miOcI/AAAAAAAAI4k/8qKGvEnnZ3w91FVwmvN9iJHK2AnwojkvgCLcBGAsYHQ/image.png'>",
+           options:["(A) Bevelgauge | ब&#2375;वल ग&#2375;ज","(B) Angle gauge | ए&#2306;गल ग&#2375;ज ","(C) Surface gauge | सरफ&#2375;स ग&#2375;ज ","(D) Universal bevelgauge | य&#2370;न&#2367;वर&#2381;सल ब&#2375;वल ग&#2375;ज"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Which file is used for manufacturing of dies and moulds? | क&#2367;स फ&#2364;&#2366;इल क&#2366; उपय&#2379;ग ड&#2366;ई और म&#2379;ल&#2381;ड क&#2375; न&#2367;र&#2381;म&#2366;ण क&#2375; ल&#2367;ए उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Rotary file | र&#2379;टर&#2368; फ&#2364;&#2366;इल ","(B) Tinkers file | ट&#2367;&#2306;कर फ&#2366;इल","(C)  Barrette file | ब&#2376;र&#2375;ट फ&#2364;&#2366;इल","(D) Rasp cut file | र&#2366;स कट फ&#2366;इल"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the method of removing metal chips clogged between the teeth of files? | फ&#2366;इल&#2379;&#2306; क&#2375; द&#2366;&#2306;त&#2379;&#2306; क&#2375; ब&#2368;च फ&#2306;स&#2368; ध&#2366;त&#2369; क&#2368; च&#2367;प&#2381;स क&#2379; हट&#2366;न&#2375; क&#2368; व&#2367;ध&#2367; क&#2381;य&#2366;",
+           options:["(A) Brush | ब&#2381;रश ","(B) Wire brush | व&#2366;यर ब&#2381;रश ","(C) Copper strip | क&#2377;पर स&#2381;ट&#2381;र&#2367;प ","(D) Chalk powder"],
+           answer:2,
+       },
+       {
+           q:"Q. Which vice is used for holding small work that requires filing or drilling? | छ&#2379;ट&#2375;-छ&#2379;ट&#2375; क&#2366;र&#2381;य ज&#2367;सम&#2375; फ&#2366;इल&#2367;&#2306;ग य&#2366; ड&#2381;र&#2367;ल&#2367;&#2306;ग क&#2368; आवश&#2381;यकत&#2366; ह&#2379;त&#2368; ह&#2376;, उनक&#2379; पकड&#2364;न&#2375; क&#2375; ल&#2367;ए क&#2367;स व&#2366;इस क&#2366; उपय&#2379;ग क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) Pin vice | प&#2367;न व&#2366;इस","(B) Pipe vice | प&#2366;इप व&#2366;इस","(C) Hand vice | ह&#2376;ण&#2381;ड व&#2366;इस ","(D) Tool maker svice | ट&#2370;ल म&#2375;कर व&#2366;ईस"],
+           answer:3,
+           
+       },
+       {
+           q:"Q. Which hacksaw blade is used for cutting along curved lines? | क&#2367;स ह&#2376;कस&#2377; ब&#2381;ल&#2375;ड क&#2366; उपय&#2379;ग घ&#2369;म&#2366;वद&#2366;र र&#2375;ख&#2366;ओ&#2306; क&#2375; स&#2366;थ क&#2366;टन&#2375; क&#2375; ल&#2367;ए क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376;? ",
+           options:["(A) HSS blade | एचएसएस ब&#2381;ल&#2375;ड ","(B) All hard blade | सभ&#2368; ह&#2366;र&#2381;ड ब&#2381;ल&#2375;ड","(C) Flexible blade | लच&#2368;ल&#2366; ब&#2381;ल&#2375;ड ","(D) Diamond blade | ह&#2368;र&#2366; ब&#2381;ल&#2375;ड"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Which chisel is used for cutting keyways? || क&#2367;स छ&#2375;न&#2368; क&#2366; उपय&#2379;ग क&#2368;-व&#2375; क&#2366;टन&#2375; क&#2375; ल&#2367;ए क&#2367;य&#2366; ज&#2366;त&#2366;",
+           options:["(A) Flat chisel | फ&#2381;ल&#2376;ट छ&#2375;न&#2368;","(B) Cross cut chisel | क&#2381;र&#2377;स कट छ&#2375;न&#2368; ","(C) Punching chisel | प&#2306;च&#2367;&#2306;ग छ&#2375;न&#2368; ","(D) Diamond point chisel | ड&#2366;यम&#2306;ड प&#2377;इ&#2306;ट छ&#2375;न&#2368;"],
+           answer:1,
+           
+       },
+       {
+           q:"Q. Name the part marked X in hammer? | हथ&#2380;ड&#2364;&#2366; म&#2375;&#2306; x च&#2367;ह&#2381;न&#2367;त भ&#2366;ग क&#2366; न&#2366;म बत&#2366;इए?<br/><img src='https://lh3.googleusercontent.com/-IvByeMoMyF8/YEDVYGCfxWI/AAAAAAAAI4o/SEWTYTVTiyQzl6VFusX-QC5Jes7iHEUxgCLcBGAsYHQ/image.png'>",
+           options:["(A) Pein ","(B) Face | फ&#2375;स","(C) Cheek | च&#2368;क ","(D) Eye hole | ऑय ह&#2379;ल"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the purpose of Crowning on the cutting edge of chisel? | छ&#2375;न&#2368; क&#2368; ध&#2366;र पर क&#2381;र&#2366;उन&#2367;&#2306;ग क&#2366; उद&#2381;द&#2375;श&#2381;य क&#2381;य&#2366; ह&#2376;?",
+           options:["(A) Prevent slipping of chisel | छ&#2375;न&#2375; क&#2368; फ&#2367;सलन र&#2379;क&#2375;&#2306; ","(B) Prevent digging of corners | क&#2379;न&#2379;&#2306; क&#2368; ख&#2369;द&#2366;ई क&#2379; र&#2379;क&#2375;&#2306; ","(C) Allow chisel to move freely on straight line | छ&#2375;न&#2368; क&#2379; स&#2368;ध&#2368; र&#2375;ख&#2366; पर स&#2381;वत&#2306;त&#2381;र र&#2370;प स&#2375; म&#2370;व करन&#2375; क&#2368; अन&#2369;मत&#2367; द&#2375;&#2306;","(D) Allow cutting edge to penetrate into the work | कट&#2367;&#2306;ग एज क&#2379; क&#2366;र&#2381;य म&#2375;&#2306; घ&#2369;सन&#2375; द&#2375;&#2306;"],
+           answer:1,
+           
+       },
+       {
+           q:"Q.  How to prevent the tool rubbing against the work surface in metal cutting process? | ध&#2366;त&#2369; क&#2366;टन&#2375; क&#2368; प&#2381;रक&#2381;र&#2367;य&#2366; म&#2375;&#2306; ट&#2370;ल क&#2379; वर&#2381;क सरफ&#2375;स स&#2375; रगड&#2364;न&#2375; क&#2379; क&#2376;स&#2375; र&#2379;क&#2375;&#2306;?",
+           options:["(A) Decrease lip angle | ल&#2367;प क&#2379;ण क&#2379; घट&#2366; कर ","(B)  Increased rake angle | र&#2375;क क&#2379;ण क&#2379; बढ&#2364;&#2366; कर ","(C)  Increase clearance angle | क&#2381;ल&#2368;यर&#2375;&#2306;स क&#2379;ण क&#2379; बढ&#2364;&#2366; कर ","(D) Decrease tool wedge angle | ट&#2370;ल व&#2376;ज क&#2379;ण क&#2379; घट&#2366; कर"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Name the property of metal that withstand shock or impact? | ध&#2366;त&#2369; क&#2368; उस प&#2381;र&#2377;पर&#2381;ट&#2368; क&#2366; न&#2366;म बत&#2366;इए ज&#2379; श&#2377;क य&#2366; इम&#2381;प&#2376;क&#2381;ट क&#2379; स&#2375;हन कर सक&#2375;?",
+           options:["(A) Tenacity | टन&#2376;स&#2367;ट&#2368;","(B) Hardness ","(C) Brittleness | भ&#2306;ग&#2369;रत&#2366;","(D) Toughness | टफन&#2375;स"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Which part is the measuring face fitted to the frame of outside micrometer? | क&#2380;नस&#2366; प&#2366;र&#2381;ट म&#2375;ज&#2364;र&#2367;&#2306;ग फ&#2375;स ह&#2376; ज&#2379; ब&#2366;हर&#2368; म&#2366;इक&#2381;र&#2379;म&#2368;टर क&#2375; फ&#2381;र&#2375;म म&#2375; फ&#2367;ट ह&#2379;त&#2366; ह&#2376; ? ",
+           options:["(A) Anvil ","(B) Barrel | ब&#2376;रल","(C) Spindle | स&#2381;प&#2367;&#2306;डल ","(D) Ratchet stop | र&#2376;चट स&#2381;ट&#2377;प"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. What is the name of micrometer? | इस म&#2366;इक&#2381;र&#2379;म&#2368;टर क&#2366; न&#2366;म क&#2381;य&#2366; ह&#2376;?<br/><img src='https://lh3.googleusercontent.com/-S6MaQGPChxM/YEDVayMRvWI/AAAAAAAAI4w/MIjPmMkx8loWwCxBj8tsZxpkhg133AdJACLcBGAsYHQ/image.png'>",
+           options:["(A) Depth micrometer | ड&#2375;प&#2381;थ म&#2366;इक&#2381;र&#2379;म&#2368;टर","(B)  Inside micrometer | इनस&#2366;इड म&#2366;इक&#2381;र&#2379;म&#2368;टर","(C) Vernier micrometer | वर&#2381;न&#2367;यर म&#2366;इक&#2381;र&#2379;म&#2368;टर ","(D) outside micrometer | आउटस&#2366;इड म&#2366;इक&#2381;र&#2379;म&#2368;टर"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. How the drill chucks are held on the machine spindle? | मश&#2368;न स&#2381;प&#2367;&#2306;डल पर ड&#2381;र&#2367;ल चक क&#2379; क&#2376;स&#2375; पकड&#2364;&#2366; ज&#2366;त&#2366; ह&#2376;?",
+           options:["(A) By arbor | आर&#2381;बर द&#2381;व&#2366;र&#2366; ","(B) By sockets | स&#2377;क&#2375;ट&#2381;स द&#2381;व&#2366;र&#2366;","(C) By sleeves | स&#2381;ल&#2368;व&#2381;स द&#2381;व&#2366;र&#2366;","(D) By special clamp | व&#2367;श&#2375;ष क&#2381;ल&#2376;&#2306;प द&#2381;व&#2366;र&#2366;"],
+           answer:0,
+           
+       },
+       {
+           q:"Q. Which drilling machine, the spindle head is moved towards or away from the column? | क&#2380;न स&#2368; ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न म&#2375; , स&#2381;प&#2367;&#2306;डल ह&#2375;ड क&#2379; क&#2377;लम क&#2375; प&#2366;स और द&#2370;र कर&#2366; ज&#2366;त&#2366; ह&#2376;",
+           options:["(A) Pillar drilling machine | प&#2367;लर ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न","(B) Gang drilling machine | ग&#2376;&#2306;ग ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न ","(C)  Radial drilling machine | र&#2375;ड&#2367;यल ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न","(D) Sensitive bench drilling machine | स&#2306;व&#2375;दनश&#2368;ल ब&#2375;&#2306;च ड&#2381;र&#2367;ल&#2367;&#2306;ग मश&#2368;न"],
+           answer:2,
+           
+       },
+       {
+           q:"Q. Which type of screw threads are rounded at the crest and root? | क&#2367;स स&#2381;क&#2381;र&#2370; थ&#2381;र&#2375;ड म&#2375; क&#2381;र&#2375;स&#2381;ट और र&#2370;ट क&#2379; र&#2366;उ&#2306;ड क&#2367;य&#2366; ज&#2366;त&#2366; ह&#2376; ?",
+           options:["(A) B.A thread | B.A थ&#2381;र&#2375;ड","(B) B.S.F thread | B.S.F ध&#2366;ग&#2366; ","(C)  S.W thread | B.S.W ध&#2366;ग&#2366;","(D) ACME thread | ACME ध&#2366;ग&#2366;"],
+           answer:2,
+           
+       },
+ ]
+
+
+ const questionNumber = document.querySelector(".question-number");
+ const questionText = document.querySelector(".question-text");
+ const optionContainer = document.querySelector(".option-container");
+ const answersIndicatorContainer = document.querySelector(".answers-indicator");
+ const homeBox = document.querySelector(".home-box");
+ const quizBox = document.querySelector(".quiz-box");
+ const resultBox = document.querySelector(".result-box");
+
+ let questionCounter = 0;
+ let currentQuestion;
+ let availableQuestions = [];
+ let availableOptions = [];
+ let correctAnswers = 0;
+ let attempt = 0;
+
+ // push the questions into  availableQuestions Array
+ function setAvailableQuestions(){
+    const totalQuestion = quiz.length;
+    for(let i=0; i<totalQuestion; i++){
+      availableQuestions.push(quiz[i])
+    }
+ }
+ 
+ // set question number and question and options
+ function getNewQuestion(){
+    // set question number 
+    questionNumber.innerHTML = "Question " + (questionCounter + 1) + " of " + quiz.length;
+
+    // set question text
+    // get random question
+    const questionIndex = availableQuestions[Math.floor(Math.random() * availableQuestions.length)]
+    currentQuestion = questionIndex;
+    questionText.innerHTML = currentQuestion.q;
+    // get the position of 'questionIndex' from the availableQuestion Array
+    const index1= availableQuestions.indexOf(questionIndex);
+    // remove the 'questionIndex' from the availableQuestion Array, so that the question does not repeat
+    availableQuestions.splice(index1,1);
+     console.log(availableQuestions)     
+    // set options
+    // get the length of options
+    const optionLen = currentQuestion.options.length
+    // push options into availableOptions Array
+    for(let i=0; i<optionLen; i++){
+       availableOptions.push(i)
+    }
+    optionContainer.innerHTML = '';
+    let animationDelay = 0.15;
+    // create options in html
+    for(let i=0; i<optionLen; i++){
+       // random option
+       const optonIndex = availableOptions[Math.floor(Math.random() * availableOptions.length)];
+       // get the position of 'optonIndex' from the availableOptions Array
+       const index2 =  availableOptions.indexOf(optonIndex);
+       // remove the  'optonIndex' from the availableOptions Array , so that the option does not repeat
+       availableOptions.splice(index2,1);
+       const option = document.createElement("div");
+       option.innerHTML = currentQuestion.options[optonIndex];
+       option.id = optonIndex;
+       option.style.animationDelay =animationDelay + 's';
+       animationDelay = animationDelay + 0.15;
+       option.className = "option";
+       optionContainer.appendChild(option)
+       option.setAttribute("onclick","getResult(this)");
+    }
+
+    questionCounter++
+ }
+
+ // get the result of current attempt question
+ function getResult(element){
+     const id = parseInt(element.id);
+     // get the answer by comparing the id of clicked option
+     if(id === currentQuestion.answer){
+      // set the green color to the correct option
+      element.classList.add("correct");
+      // add the indicator to correct mark
+      updateAnswerIndicator("correct");
+      correctAnswers++;
+     }
+     else{
+      // set the red color to the incorrect option
+      element.classList.add("wrong");
+      // add the indicator to wrong mark
+      updateAnswerIndicator("wrong");
+
+        // if the answer is incorrect then show the correct option by adding green color the correct option
+        const optionLen = optionContainer.children.length;
+        for(let i=0; i<optionLen; i++){
+          if(parseInt(optionContainer.children[i].id) === currentQuestion.answer){
+              optionContainer.children[i].classList.add("correct");     
+          }
+        }   
+       
+     }
+   attempt++;
+   unclickableOptions();
+ }
+ 
+ // make all the options unclickable once the user select a option (RESTRICT THE USER TO CHANGE THE OPTION AGAIN)
+ function unclickableOptions(){
+    const optionLen = optionContainer.children.length;
+    for(let i=0 ; i<optionLen; i++){
+      optionContainer.children[i].classList.add("already-answered");
+    }
+ }
+ 
+ function answersIndicator(){
+    answersIndicatorContainer.innerHTML = '';
+    const totalQuestion = quiz.length;
+    for(let i=0; i<totalQuestion; i++){
+        const indicator = document.createElement("div");
+         answersIndicatorContainer.appendChild(indicator);
+    }
+ }
+ function updateAnswerIndicator(markType){
+     answersIndicatorContainer.children[questionCounter-1].classList.add(markType)
+ }
+
+ function next(){
+   if(questionCounter === quiz.length){
+      quizOver();
+   }
+   else{
+     getNewQuestion();
+   }
+ }
+
+ function quizOver(){
+  // hide quiz Box
+  quizBox.classList.add("hide");
+  // show result Box
+  resultBox.classList.remove("hide");
+    quizResult();
+ }
+ // get the quiz Result
+ function quizResult(){
+   resultBox.querySelector(".total-question").innerHTML = quiz.length;
+   resultBox.querySelector(".total-attempt").innerHTML = attempt;
+   resultBox.querySelector(".total-correct").innerHTML = correctAnswers;
+   resultBox.querySelector(".total-wrong").innerHTML = attempt - correctAnswers;
+   const percentage = (correctAnswers/quiz.length)*100;
+   resultBox.querySelector(".percentage").innerHTML =percentage.toFixed(2) + "%";
+   resultBox.querySelector(".total-score").innerHTML =correctAnswers +" / " + quiz.length;
+ }
+
+ function resetQuiz(){
+    questionCounter = 0;
+    correctAnswers = 0;
+    attempt = 0;
+ }
+
+ function tryAgainQuiz(){
+   // hide the resultBox
+   resultBox.classList.add("hide");
+   // show the quizBox
+   quizBox.classList.remove("hide");
+     resetQuiz();
+     startQuiz();
+ }
+
+ function goToHome(){
+  // hide result Box
+  resultBox.classList.add("hide");
+  // show home box
+  homeBox.classList.remove("hide");
+  resetQuiz();
+ }
+ 
+ // #### STARTING POINT ####
+
+ function startQuiz(){
+    
+     // hide home box 
+     homeBox.classList.add("hide");
+     // show quiz Box
+     quizBox.classList.remove("hide");
+    // first we will set all questions in availableQuestions Array
+    setAvailableQuestions();
+    // second we will call getNewQuestion(); function
+    getNewQuestion();
+    // to create indicator of answers
+    answersIndicator();
+
+ }
+
+
+window.onload = function (){
+  homeBox.querySelector(".total-question").innerHTML = quiz.length;
+}
+
+
+</script>
